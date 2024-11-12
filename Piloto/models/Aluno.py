@@ -1,5 +1,6 @@
 from datetime import date
 from django.db import models
+from .Situacao import Situacao
 from .fomaIngresso import FormaIngresso
 from .Curso import Curso
 from .Campus import Campus
@@ -18,8 +19,8 @@ class Aluno(models.Model):
     campus = models.ForeignKey(Campus, verbose_name="Campus", on_delete=models.PROTECT)
     dataNascimento = models.DateField(null=True, blank=True)
     foto = models.ImageField(upload_to='alunos_fotos/', blank=True, null=True)
-    situacao = models.IntegerField('Situação',choices=SITUACAO_CHOICES)
-    formaIngresso = models.ForeignKey(FormaIngresso, verbose_name="Forma de cadastro", on_delete=models.PROTECT)
+    situacao = models.ForeignKey(Situacao, verbose_name="Situação", on_delete=models.PROTECT)
+    formaIngresso = models.ForeignKey(FormaIngresso, verbose_name="Forma de Ingresso", on_delete=models.PROTECT)
     dataIngresso = models.DateField('data de cadastro',default=date.today, blank=True, null=True)
 
     def save(self, *args, **kwargs):
