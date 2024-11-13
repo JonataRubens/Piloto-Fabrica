@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from Piloto.models import Aluno, Campus, Curso
 from Piloto.models.fomaIngresso import FormaIngresso
-from Piloto.models import SITUACAO_CHOICES 
+# from Piloto.models import SITUACAO_CHOICES 
 
 
 
@@ -28,5 +28,4 @@ class ListaAlunosView(ListView):
         context['campus_options'] = Campus.objects.all()
         context['curso_options'] = Curso.objects.all()
         context['formas_ingresso'] = FormaIngresso.objects.all()
-        context['SITUACAO_CHOICES'] = SITUACAO_CHOICES
         return context

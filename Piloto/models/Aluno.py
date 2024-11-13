@@ -5,12 +5,6 @@ from .fomaIngresso import FormaIngresso
 from .Curso import Curso
 from .Campus import Campus
 
-SITUACAO_CHOICES = [
-    (1, 'Vinculado'),
-    (2, 'Formado'),
-    (3, 'Jubilado'),
-    (4, 'Evadido'),
-]
 class Aluno(models.Model):
     nomeCompleto = models.CharField('Nome completo',max_length=500,help_text='')
     cpf = models.CharField('CPF',max_length=11, unique=True, help_text='')
@@ -19,18 +13,33 @@ class Aluno(models.Model):
     campus = models.ForeignKey(Campus, verbose_name="Campus", on_delete=models.PROTECT)
     dataNascimento = models.DateField(null=True, blank=True)
     foto = models.ImageField(upload_to='alunos_fotos/', blank=True, null=True)
-    situacao = models.ForeignKey(Situacao, verbose_name="Situação", on_delete=models.PROTECT)
+    situacao = models.ForeignKey(Situacao, verbose_name="Situação", on_delete=models.PROTECT,default=5)
     formaIngresso = models.ForeignKey(FormaIngresso, verbose_name="Forma de Ingresso", on_delete=models.PROTECT)
-    dataIngresso = models.DateField('data de cadastro',default=date.today, blank=True, null=True)
+    dataCadastro = models.DateField('data de cadastro',default=date.today, blank=True, null=True)
+    dataUpdate = models.DateTimeField('Ultima atualização', auto_now=True)  
+    ativo = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
-        if not self.matricula:
-            self.matricula = self.GerarMatricula()
+        
+        if self.pk:
+            if self.situacao.id != 5:  
+                self.ativo = False
+            else:
+                self.ativo = True
+        else:
+            if not self.matricula:
+                self.matricula = self.GerarMatricula()
+        
+            if self.curso and self.curso.campus:
+                self.campus = self.curso.campus
+
+    
+            
         super().save(*args, **kwargs)
 
     def GerarMatricula(self):
-        ano = self.dataIngresso.strftime('%Y')  # Certifique-se de que 'dataIngresso' é o nome correto
-        semestre = '1' if self.dataIngresso.month <= 6 else '2'
+        ano = self.dataCadastro.strftime('%Y') 
+        semestre = '1' if self.dataCadastro.month <= 6 else '2'
         
         # Obter a última matrícula gerada para o ano e semestre
         ultima_matricula = Aluno.objects.filter(matricula__startswith=f'{ano}{semestre}').order_by('-matricula').first()
@@ -43,6 +52,9 @@ class Aluno(models.Model):
             sequencia = 1
 
         return f'{ano}{semestre}{str(sequencia).zfill(4)}'
+    
+    def status_ativo(self):
+        return True if self.ativo else False
     
     def __str__(self):
         return f"{self.nomeCompleto} ({self.matricula})"
