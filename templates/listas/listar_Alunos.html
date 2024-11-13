@@ -28,7 +28,7 @@
                             <option value="">-- Selecione o Curso --</option>
                             {% for curso in curso_options %}
                                 <option value="{{ curso.id }}" {% if curso.id == curso_filter %}selected{% endif %}>
-                                    {{ curso.nome }}
+                                    {{ curso.nome }}{{" ("}}{{ curso.campus.nome }}{{")"}}
                                 </option>
                             {% endfor %}
                         </select>
@@ -45,7 +45,7 @@
                         <tr>
                             <th>Nome Completo</th>
                             <th>Curso</th>
-                            <th>Campus</th>
+                            {% comment %} <th>Campus</th> {% endcomment %}
                             <th>Data de Cadastro</th>
                             <th>Situação</th>
                             <th>Forma de Ingresso</th>
@@ -58,7 +58,7 @@
                             <tr>
                                 <td>{{ aluno.nomeCompleto }}</td>
                                 <td>{{ aluno.curso }}</td>
-                                <td>{{ aluno.campus }}</td>
+                                {% comment %} <td>{{ aluno.campus }}</td> {% endcomment %}
                                 <td>{{ aluno.dataCadastro }}</td>
                                 <td>{{ aluno.situacao }}</td>
                                 <td>{{ aluno.formaIngresso }}</td>
@@ -109,9 +109,9 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="situacao">Situação</label>
-                                                        <select class="form-control" id="situacao{{ aluno.id }}" name="situacao">
-                                                            {% for valor, descricao in SITUACAO_CHOICES %}
-                                                                <option value="{{ valor }}" {% if aluno.situacao == valor %}selected{% endif %}>{{ descricao }}</option>
+                                                        <select class="form-control" id="situacao{{ situacao.id }}" name="situacao">
+                                                            {% for situacao in situacao_option %}
+                                                                <option value="{{ situacao.id }}" {% if aluno.situacao.id == situacao.id %}selected{% endif %}>{{ situacao.nome }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </div>
