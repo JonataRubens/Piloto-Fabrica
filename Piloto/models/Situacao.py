@@ -1,7 +1,8 @@
 from django.db import models
 
 class Situacao(models.Model):
-    nome = models.CharField(max_length=50, unique=True)
+    nome = models.CharField("Nome", max_length=50)
+
 
     class Meta:
         verbose_name = "Situação"
