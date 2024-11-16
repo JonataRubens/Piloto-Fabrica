@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Piloto.models import FormaIngresso
+from piloto.models import FormaIngresso
 
 
 admin.site.register(FormaIngresso)

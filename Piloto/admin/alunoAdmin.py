@@ -1,13 +1,13 @@
 from django.contrib import admin
-from Piloto.models import Aluno, Situacao
+from piloto.models import Aluno
 
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
     list_display = ('nomeCompleto', 'cpf', 'matricula', 'curso','getCampus', 'formaIngresso', 'situacao', 'dataCadastro', 'ativo')
     search_fields = ('nomeCompleto', 'cpf', 'matricula')
     list_filter = ('curso', 'situacao', 'formaIngresso', 'ativo' )
-    readonly_fields = ('dataCadastro',)
-    exclude = ('matricula', )
+    readonly_fields = ()
+    exclude = ('matricula', 'dataCadastro', )
 
     def getCampus(self, obj):
         return obj.curso.campus.nome  # Ajuste para refletir o relacionamento real

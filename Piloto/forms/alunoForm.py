@@ -1,5 +1,5 @@
 from django import forms
-from Piloto.models import Aluno
+from piloto.models import Aluno
 
 
 class AlunoForm(forms.ModelForm):

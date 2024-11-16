@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from Piloto.forms.campusForm import CampusForm
-from Piloto.models import Curso
+from piloto.forms.campusForm import CampusForm
+from piloto.models import Curso
 from django.views.generic.edit import CreateView
 
 

@@ -1,6 +1,6 @@
 from django import forms
 
-from Piloto.models import Curso
+from piloto.models import Curso
 
 
 class CursoForm(forms.ModelForm):

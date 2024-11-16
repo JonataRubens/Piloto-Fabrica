@@ -1,4 +1,4 @@
 from django.contrib import admin
-from Piloto.models import Situacao
+from piloto.models import Situacao
 
 admin.site.register(Situacao)

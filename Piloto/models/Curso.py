@@ -2,8 +2,8 @@ from django.db import models
 from .Campus import Campus
 
 class Curso(models.Model):
-    nome = models.CharField(max_length=100)
-    campus = models.ForeignKey(Campus, on_delete=models.PROTECT, related_name="cursos")
+    nome = models.CharField("Nome do Curso", max_length=100)
+    campus = models.ForeignKey(Campus, verbose_name="Campus", on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = "Curso"

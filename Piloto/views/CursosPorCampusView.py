@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views import View
-from Piloto.models import Curso
+from piloto.models import Curso
 
 
 class CursosPorCampusView(View):

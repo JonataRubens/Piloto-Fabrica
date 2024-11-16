@@ -1,5 +1,5 @@
 from django.urls import path
-from Piloto.views import CadastrarAlunoView, CampusCreateView, CreateFormaIngresso, CursoCreateView, CursosPorCampusView, DefaultView, ListaAlunosView
+from piloto.views import CadastrarAlunoView, CampusCreateView, CreateFormaIngresso, CursoCreateView, CursosPorCampusView, DefaultView, ListaAlunosView
 
 
 urlpatterns = [

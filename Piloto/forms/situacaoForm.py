@@ -1,5 +1,5 @@
 from django import forms
-from Piloto.models import Situacao
+from piloto.models import Situacao
 
 
 class IngressoForm(forms.ModelForm):

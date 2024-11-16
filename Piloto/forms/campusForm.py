@@ -1,5 +1,5 @@
 from django import forms
-from Piloto.models import Campus
+from piloto.models import Campus
 
 
 class CampusForm(forms.ModelForm):

@@ -1,6 +1,6 @@
 from django.views.generic import ListView
-from Piloto.models import Aluno, Campus, Curso, Situacao
-from Piloto.models.fomaIngresso import FormaIngresso
+from piloto.models import Aluno, Campus, Curso, Situacao
+from piloto.models.fomaIngresso import FormaIngresso
 # from Piloto.models import SITUACAO_CHOICES 
 
 
